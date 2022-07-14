@@ -39,7 +39,7 @@ def play_game(num_people, num_iterations, strategy_func):
     assert num_people % 2 == 0 and num_people > 0
     arr = list(range(num_people))
     total_failures = 0
-    for _ in range(num_iterations):
+    for iteration in range(num_iterations):
         random.shuffle(arr)
         failure = False
         for person_index in range(num_people):
@@ -48,6 +48,8 @@ def play_game(num_people, num_iterations, strategy_func):
             if not strategy_func(num_people, person_index, arr):
                 failure = True
                 total_failures += 1
+        if (iteration + 1) % 10_000 == 0:
+            print(f"Done with {iteration+1:,} iterations...")
 
     return total_failures
 
